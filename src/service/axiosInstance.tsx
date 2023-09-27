@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const reqres = axios.create({
-  baseURL: "https://fakestoreapi.com/",
+  baseURL: "http://localhost:8000/",
 });
 
 export default reqres;

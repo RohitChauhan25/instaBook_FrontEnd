@@ -4,16 +4,17 @@ import reqres from "../service/axiosInstance";
 interface IParams {
   url: string;
   payload?: any;
-  token?: string;
+  token?: boolean;
 }
-const post = async ({ url, payload }: IParams) => {
-  //   const authToken = localStorage.getItem("_token");
 
-  //   const { data } = await reqres.post(url, payload, {
-  //     headers: { token: authToken },
-  //   });
+const post = async ({ url, payload, token = true }: IParams) => {
+  let headers: any;
+  if (token) {
+    const authToken = localStorage.getItem("token");
+    headers = { authorization: `Bearer ${authToken}` };
+  }
 
-  const { data } = await reqres.post(url, payload);
+  const { data } = await reqres.post(url, payload, { headers });
   return data;
 };
 const usePost = () => useMutation(post);

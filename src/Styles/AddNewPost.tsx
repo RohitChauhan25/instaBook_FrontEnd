@@ -21,5 +21,37 @@ export const Form = styled.form`
 
   TextArea {
     font-size: 20px;
+    &:focus {
+      border: 1px solid blue;
+    }
   }
+`;
+export const SubmitButton = styled.button<{ background: any }>`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px;
+  background-color: ${(props) => (props.background ? "#4949cb" : `#8f8fef`)};
+`;
+
+export const Input = styled.input`
+  min-height: 60px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid #b9b9b9;
+  outline: none;
+  padding: 0 30px 0 10px;
+  width: -webkit-fill-available;
+  &:focus {
+    border: 1px solid blue;
+  }
+`;
+
+export const FileUpload = styled.input`
+  cursor: pointer;
+  visibility: hidden;
 `;

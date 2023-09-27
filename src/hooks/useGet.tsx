@@ -1,18 +1,12 @@
 import { useQuery } from "react-query";
 import reqres from "../service/axiosInstance";
 
-interface IParams {
-  key?: any;
-  url?: any;
-  configs?: any;
-  fetchCountry?: string;
-  api?: string;
-  data?: any;
-}
-
-const useGet = ({ key, url, configs }: IParams) => {
+const useGet = (key: string, url: string, configs?: any) => {
   const get = async () => {
-    const data = await reqres.get(url);
+    let headers: any = {};
+    const authToken = localStorage.getItem("token");
+    if (configs?.token) headers = { Authorization: `Bearer ${authToken}` };
+    const { data } = await reqres.get(url, { headers });
     return data;
   };
 

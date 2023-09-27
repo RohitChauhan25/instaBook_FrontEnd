@@ -14,10 +14,16 @@ import {
 import { useForm } from "react-hook-form";
 import { Button } from "antd";
 import user from "Assets/images/user.png";
+import usePost from "hooks/usePost";
+import { HomeRoute } from "Constant/routes";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { mutateAsync } = usePost();
+  const navigate = useNavigate();
   const {
     control,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -27,6 +33,22 @@ const Login = () => {
       password: "",
     },
   });
+
+  const submitForm = async (data: any) => {
+    try {
+      const res = await mutateAsync({
+        url: "/api/login",
+        payload: data,
+      });
+      if (res) {
+        localStorage.setItem("token", res?.token);
+        navigate(HomeRoute?.path);
+      }
+    } catch (error: any) {
+      return { error: error };
+    }
+  };
+
   return (
     <Container>
       <Title>InstaBook</Title>
@@ -34,7 +56,7 @@ const Login = () => {
         <DummyProfile>
           <img src={user} alt="" />
         </DummyProfile>
-        <Form>
+        <Form onSubmit={handleSubmit(submitForm)}>
           <InputFields>
             <FieldContainer>
               <Inputs

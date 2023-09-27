@@ -16,7 +16,7 @@ const Routes = () => {
               path={path}
               element={
                 restricted ? (
-                  <PrivateRoute component={Component} />
+                  <PrivateRoute component={Component} restricted />
                 ) : (
                   <PublicRoute component={Component} />
                 )

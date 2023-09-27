@@ -1,28 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface CounterState {
-  tab: number
+  tab: number;
 }
 
 const initialState: CounterState = {
   tab: 0,
-}
+};
 
 export const headerSlice = createSlice({
-  name: 'header',
+  name: "header",
   initialState,
   reducers: {
     updateTab: (state, action) => {
-      return (state.tab = action.payload)
+      return (state.tab = action.payload);
     },
     resetTab: (state) => {
-      state.tab = 1
+      state.tab = 1;
     },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { updateTab, resetTab } = headerSlice.actions
+export const { updateTab, resetTab } = headerSlice.actions;
 
-export default headerSlice.reducer
+export default headerSlice.reducer;
